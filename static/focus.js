@@ -32,14 +32,15 @@ function sendRequest(url) {
     return fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Request failed with status ${response.status}`);
+                alert(`Request failed with status ${response.status}`);
             }
             return response.json();
         })
         .catch(() => {
-            throw new Error("Network error occurred");
+            alert("Network error occurred");
         });
 }
+
 
 
 
