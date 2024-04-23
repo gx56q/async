@@ -18,6 +18,7 @@ async function run() {
             reqsPromise,
             buhPromise
         ]);
+        if (!analytics || !requisites || !buh) return;
 
         const orgsMap = reqsToMap(requisites);
 
@@ -35,12 +36,13 @@ function sendRequest(url) {
     return fetch(url)
         .then(response => {
             if (!response.ok) {
-                alert(`Request failed with status ${response.status}`);
+                alert(`Request failed with status ${response.status} and status text ${response.statusText}`);
             }
             return response.json();
         })
-        .catch(() => {
-            alert("Network error occurred");
+        .catch(error => {
+            console.error("Error:", error.message);
+            return null;
         });
 }
 
