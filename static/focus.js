@@ -32,8 +32,6 @@ async function run() {
 }
 
 
-
-
 run();
 
 function sendRequest(url) {
@@ -48,8 +46,6 @@ function sendRequest(url) {
             alert("Network error occurred");
         });
 }
-
-
 
 
 function reqsToMap(requisites) {
@@ -100,7 +96,7 @@ function renderOrganization(orgInfo, template, container) {
                 orgInfo.buhForms[orgInfo.buhForms.length - 1].form2[0] &&
                 orgInfo.buhForms[orgInfo.buhForms.length - 1].form2[0]
                     .endValue) ||
-                0
+            0
         );
     } else {
         money.textContent = "—";
