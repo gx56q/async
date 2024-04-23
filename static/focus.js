@@ -7,30 +7,27 @@ const API = {
 
 async function run() {
     try {
-        const orgOgrnsPromise = sendRequest(API.organizationList);
+        let orgOgrns = await sendRequest(API.organizationList);
+        const ogrns = orgOgrns.join(",");
         const analyticsPromise = sendRequest(`${API.analytics}?ogrn=${ogrns}`);
         const reqsPromise = sendRequest(`${API.orgReqs}?ogrn=${ogrns}`);
         const buhPromise = sendRequest(`${API.buhForms}?ogrn=${ogrns}`);
 
-        const [orgOgrns, analytics, requisites, buh] = await Promise.all([
-            orgOgrnsPromise,
+        const [analytics, requisites, buh] = await Promise.all([
             analyticsPromise,
             reqsPromise,
             buhPromise
         ]);
 
-        orgOgrns.join(",");
         const orgsMap = reqsToMap(requisites);
 
         addInOrgsMap(orgsMap, analytics, "analytics");
         addInOrgsMap(orgsMap, buh, "buhForms");
-
         render(orgsMap, orgOgrns);
     } catch (error) {
         console.error("Error in run function:", error);
     }
 }
-
 
 run();
 
